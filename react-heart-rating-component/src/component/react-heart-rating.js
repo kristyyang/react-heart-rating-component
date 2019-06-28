@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-const parentStyles = {
-  overflow: 'hidden',
-  position: 'relative'
-}
+
+
+const ParentStyles = styled.div `
+overflow: 'hidden';
+position: 'relative'
+`
 
 const defaultStyles = {
   position: 'relative',
@@ -16,7 +19,7 @@ const defaultStyles = {
 
 const getHalfHeartStyle = (color, uniqueness) => {
   return `
-    .react-stars-${uniqueness}:before {
+    .react-heart-${uniqueness}:before {
       position: absolute;
       overflow: hidden;
       display: block;
@@ -34,14 +37,12 @@ class ReactHearts extends Component {
 
     super(props)
 
-    // set defaults
-
     props = Object.assign({}, props)
 
     this.state = {
       uniqueness: (Math.random() + '').replace('.', ''),
       value: props.value || 0,
-      stars: [],
+      hearts: [],
       halfStar: {
         at: Math.floor(props.value),
         hidden: props.half && props.value % 1 < 0.5
@@ -64,13 +65,13 @@ class ReactHearts extends Component {
 
   componentDidMount() {
     this.setState({
-      stars: this.getStars(this.state.value)
+      hearts: this.gethearts(this.state.value)
     })
   }
 
   componentWillReceiveProps(props) {
     this.setState({
-      stars: this.getStars(props.value),
+      hearts: this.gethearts(props.value),
       value: props.value,
       halfStar: {
         at: Math.floor(props.value),
@@ -93,26 +94,26 @@ class ReactHearts extends Component {
   }
 
   getRate() {
-    let stars
+    let hearts
     if (this.state.config.half) {
-      stars = Math.floor(this.state.value)
+      hearts = Math.floor(this.state.value)
     } else {
-      stars = Math.round(this.state.value)
+      hearts = Math.round(this.state.value)
     }
-    return stars
+    return hearts
   }
 
-  getStars(activeCount) {
+  gethearts(activeCount) {
     if (typeof activeCount === 'undefined') {
       activeCount = this.getRate()
     }
-    let stars = []
+    let hearts = []
     for (let i = 0; i < this.state.config.count; i++) {
-      stars.push({
+      hearts.push({
         active: i <= activeCount - 1
       })
     }
-    return stars
+    return hearts
   }
 
   mouseOver(event) {
@@ -128,7 +129,7 @@ class ReactHearts extends Component {
       index = index + 1
     }
     this.setState({
-      stars: this.getStars(index)
+      hearts: this.gethearts(index)
     })
   }
 
@@ -147,7 +148,7 @@ class ReactHearts extends Component {
       halfStar.at = Math.floor(this.state.value)
     }
     this.setState({
-      stars: this.getStars()
+      hearts: this.gethearts()
     })
   }
 
@@ -167,12 +168,12 @@ class ReactHearts extends Component {
     }
     this.setState({
       value: value,
-      stars: this.getStars(index)
+      hearts: this.gethearts(index)
     })
     this.props.onChange(value)
   }
 
-  renderHalfStarStyleElement() {
+  renderHalfheartstyleElement() {
     const { config, uniqueness } = this.state
     return (
       <style dangerouslySetInnerHTML={{
@@ -181,13 +182,13 @@ class ReactHearts extends Component {
     )
   }
 
-  renderStars() {
-    const { halfStar, stars, uniqueness, config } = this.state
+  renderhearts() {
+    const { halfStar, hearts, uniqueness, config } = this.state
     const { color1, color2, size, char, half, edit } = config
-    return stars.map((star, i) => {
+    return hearts.map((star, i) => {
       let starClass = ''
       if (half && !halfStar.hidden && halfStar.at === i) {
-        starClass = `react-stars-${uniqueness}`
+        starClass = `react-heart-${uniqueness}`
       }
       const style = Object.assign({}, defaultStyles, {
         color: star.active ? color2 : color1,
@@ -218,11 +219,11 @@ class ReactHearts extends Component {
     } = this.props
 
     return (
-      <div className={className} style={parentStyles}>
+      <ParentStyles>
         {this.state.config.half ?
-          this.renderHalfStarStyleElement() : ''}
-        {this.renderStars()}
-      </div>
+          this.renderHalfheartstyleElement() : ''}
+        {this.renderhearts()}
+      </ParentStyles>
     )
   }
 
