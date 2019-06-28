@@ -20,9 +20,9 @@ class App extends Component {
           onChange={newRating => {
             console.log(newRating);
           }}
-          emptyIcon={<i className="far fa-star" />}
-          halfIcon={<i className="fa fa-star-half-alt" />}
-          filledIcon={<i className="fa fa-star" />}
+          emptyIcon={<i className="far fa-heart" />}
+          halfIcon={<i className="fa fa-heart-half-alt" />}
+          filledIcon={<i className="fa fa-heart" />}
         />
       </div>
     );

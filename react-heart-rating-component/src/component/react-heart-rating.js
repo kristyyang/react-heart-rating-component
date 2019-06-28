@@ -37,7 +37,7 @@ class ReactHearts extends Component {
 
     super(props)
 
-    props = Object.assign({}, props)
+    /* props = Object.assign({}, props) */
 
     this.state = {
       uniqueness: (Math.random() + '').replace('.', ''),
