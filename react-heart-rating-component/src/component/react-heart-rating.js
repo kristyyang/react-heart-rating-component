@@ -14,7 +14,7 @@ const defaultStyles = {
   float: 'left'
 }
 
-const getHalfStarStyles = (color, uniqueness) => {
+const getHalfHeartStyle = (color, uniqueness) => {
   return `
     .react-stars-${uniqueness}:before {
       position: absolute;
@@ -176,7 +176,7 @@ class ReactHearts extends Component {
     const { config, uniqueness } = this.state
     return (
       <style dangerouslySetInnerHTML={{
-        __html: getHalfStarStyles(config.color2, uniqueness)
+        __html: getHalfHeartStyle(config.color2, uniqueness)
       }}></style>
     )
   }
